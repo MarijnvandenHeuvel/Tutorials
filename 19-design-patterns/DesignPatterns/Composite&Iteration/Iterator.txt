@@ -1,0 +1,28 @@
+for (int i=0; i < Array.length(); i++){
+	System.out.println(Array[i])
+}
+
+for (int i=0; i < ArrayList.size(); i++){
+	System.out.println(ArrayList.get(i))
+}
+
+/*Iterate over Array & ArrayList can't be done in exactly the same way. While using a foreach, everything can be the same.*/
+
+for (Object o : Array){
+	System.out.println(o)
+	}
+
+for (Object o : ArrayList){
+	System.out.println(o)
+	}
+
+/* Iterator does the work underneath. The iterator interface is implemented in every collection. Could not work with Array, is not a collection. */
+
+Iterator iter = pineAppleList.iterator();
+while(iter.hasNext()) {
+	System.out.println(iter.next)
+	iter.remove();
+	}
+	
+/* Why use an iterator instead of an foreach? With an iterator you can remove items with the method remove(), could be useful in for example the e-mailsorting exercise. 
+When the structure is more complex than just a list (like with a composite) iterator also comes to the rescue */

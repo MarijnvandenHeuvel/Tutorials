@@ -1,0 +1,77 @@
+/* The concept of composite is quite simple. Look at you items in IntelliJ, for example "View". 
+The View is a menu. This has different components like for example "Tool Windows", "Quick Definition" or "Recently Changed Files". 
+The tool windows is in itself also a menu. The other ones are menu items. But both are menucomponents 
+
+To construct this you will need different Classes.
+
+The abstract class MenuComponent will be the first one.*/
+
+
+public abstract class MenuComponent {
+
+    public void open() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void execute() {
+        throw new UnsupportedOperationException();
+    }
+
+}
+
+/* In this class, every method throws an error. This will be the default. Composite does not like Liskov! (Because methods should only work on the wright items!))
+
+ This will be extended in MenuItem */
+
+
+public class MenuItem extends MenuComponent {
+    String name;
+
+    public MenuItem(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+  public void execute(){
+      System.out.println("Execute this");
+  }
+
+}
+
+
+/* On a menu-item the method execute() is overwritten, because you should be able to execute them! 
+
+The MenuComponent is also extended in Menu */
+
+import java.util.ArrayList;
+
+public class Menu extends MenuComponent {
+    ArrayList<MenuComponent> menuComponents = new ArrayList<>();
+
+    public void open(){
+        System.out.println("This opens the menu");
+    }
+}
+
+/* in the menu you won't be able to execute it (because it is a whole menu), but you can open it. 
+
+In the main method you can try this: */
+
+
+public class Main {
+    public static void main(String[] args) {
+        MenuItem menIt = new MenuItem("een item");
+        Menu menu = new Menu();
+		
+        menIt.execute();
+        menu.execute();
+
+        menu.open();
+        menIt.open();
+    }
+}
+
+/* I think by looking at the code, it should be clear which method on which object should run or should throw an error. */
